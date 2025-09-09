@@ -34,5 +34,19 @@ public class Pointage {
         return Math.abs(total - 1.0) < 0.0001;
     }
 
+    public static long getDays(Prestataire p, LocalDate debut, LocalDate fin) {
+        return p.getPointages().stream()
+                .filter(pt -> !pt.getDate().isBefore(debut) && !pt.getDate().isAfter(fin))
+                .filter(pt -> pt.getMissions().stream().noneMatch(m ->
+                        m.getType() == Mission.TypeTravail.ABS_PAYÉE ||
+                                m.getType() == Mission.TypeTravail.ABS_NON_PAYÉE))
+                .count();
+    }
+
+    public static double calculerSalaire(Prestataire p, LocalDate debut, LocalDate fin) {
+        long jours = getDays(p, debut, fin);
+        return jours * p.getTjm();
+    }
+
 }
 

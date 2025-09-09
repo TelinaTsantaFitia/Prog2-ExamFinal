@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Travailleur {
@@ -17,5 +18,9 @@ public class Travailleur {
         this.prenom = prenom;
         this.email = email;
         this.telephone = telephone;
+    }
+
+    public List<Pointage> getPointages() {
+        return pointages;
     }
 }
