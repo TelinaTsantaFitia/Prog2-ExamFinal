@@ -24,7 +24,15 @@ public class Pointage {
         return date;
     }
 
-
+    public static boolean pointageDay(Pointage p) {
+        double total = 0;
+        for (Mission m : p.getMissions()) {
+            double q = m.getQuota();
+            if (q <= 0 || q > 1) throw new IllegalArgumentException("Quota invalide : " + q);
+            total += q;
+        }
+        return Math.abs(total - 1.0) < 0.0001;
+    }
 
 }
 
